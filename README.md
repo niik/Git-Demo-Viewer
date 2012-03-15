@@ -2,7 +2,7 @@
 
 Code dump of one of my hacks. A git tree vizualiser. Never finished, severely lacking in features. Built using libgitsharp, QuickGraph and Graphsharp.
 
-Phil Haack created a very similar but much less hacky visualizer ([blog post](http://haacked.com/archive/2012/03/15/visualize-git-with-seegit.aspx), [github](https://github.com/Haacked/SeeGit)) and you'd do best to check that out instead.
+Phil Haack created a very similar but much less hacky visualizer ([blog post](http://haacked.com/archive/2012/03/15/visualize-git-with-seegit.aspx), [github](https://github.com/Haacked/SeeGit)) and you should head over there instead. His code looks better in every way, he even got the name right. Hopefully this repo can be of some use to some one wanting to play with libgitsharp and/or the graph libs.
 
 ![](https://s3-eu-west-1.amazonaws.com/freakcode/git-demo-viewer.png)
 
