@@ -1,0 +1,89 @@
+﻿<Window x:Class="git_demo_viewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:graphsharp="clr-namespace:GraphSharp.Controls;assembly=GraphSharp.Controls"
+        xmlns:local="clr-namespace:git_demo_viewer"
+        xmlns:git="clr-namespace:git_demo_viewer.Graph"
+        xmlns:zoom="clr-namespace:WPFExtensions.Controls;assembly=WPFExtensions"
+        Title="Git Demo Viewer" Height="800" Width="525">
+
+    <Window.Resources>
+
+        <DataTemplate DataType="{x:Type git:CommitVertex}">
+
+            <Border BorderBrush="White"
+                        Background="Black"
+            BorderThickness="2"
+            CornerRadius="5">
+
+                <StackPanel Orientation="Vertical" Margin="5" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Path=Title, Mode=OneWay}" Foreground="White" />
+                    <TextBlock Text="{Binding Path=Subject, Mode=OneWay}" Foreground="White" FontSize="8" />
+                </StackPanel>
+
+
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="2" Color="LightGray"
+                            Opacity="0.3" Direction="315"/>
+                </Border.Effect>
+            </Border>
+
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type git:BranchVertex}">
+            <Border BorderBrush="White"
+                        Background="#1BA8E0"
+            BorderThickness="2"
+            CornerRadius="5">
+
+                <StackPanel Orientation="Vertical" Margin="5" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Path=Title, Mode=OneWay}" Foreground="White" />
+                </StackPanel>
+
+
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="2" Color="LightGray"
+                            Opacity="0.3" Direction="315"/>
+                </Border.Effect>
+            </Border>
+        </DataTemplate>
+
+        <Style TargetType="{x:Type graphsharp:VertexControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type graphsharp:VertexControl}">
+                        <ContentPresenter Content="{TemplateBinding Vertex}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type graphsharp:EdgeControl}">
+            <Style.Resources>
+                <ToolTip x:Key="ToolTipContent">
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold" Text="Edge.Title"/>
+                        <TextBlock Text="{Binding ID}"/>
+                    </StackPanel>
+                </ToolTip>
+            </Style.Resources>
+            <Setter Property="ToolTip" Value="{StaticResource ToolTipContent}"/>
+        </Style>
+
+    </Window.Resources>
+
+
+
+
+    <zoom:ZoomControl Grid.Row="1" Zoom="0.2" Margin="10">
+
+        <git:GitGraphLayout x:Name="graphLayout" Margin="10"
+            Graph="{Binding Path=Graph}"
+            OverlapRemovalAlgorithmType="FSA" AsyncCompute="True"
+        />
+
+        <zoom:ZoomControl.Background>
+            <SolidColorBrush />
+        </zoom:ZoomControl.Background>
+    </zoom:ZoomControl>
+</Window>
